@@ -1,0 +1,25 @@
+<h1 class="title well">
+  <section>
+    <small>items: {{sum}}, now triggering scroll: {{direction}}</small>
+  </section>
+  <section>
+    <button class="btn btn-info" (click)="modalService.open(modalTemplate)">Open Infinite Scroll in Modal</button>
+  </section>
+</h1>
+
+<ng-template #modalTemplate let-modal>
+  <div class="modal-header modalHeader">
+    <h6 class="modal-title" id="modal-basic-title" translate>Modal</h6>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss()">
+      <span aria-hidden="true" class="vibrant-icon-Close-Icon"></span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div infinite-scroll [infiniteScrollDistance]="scrollDistance" [infiniteScrollUpDistance]="scrollUpDistance"
+      [infiniteScrollThrottle]="throttle" [fromRoot]="true" [infiniteScrollContainer]="'.modal'" (scrolled)="onScrollDown()" (scrolledUp)="onUp()">
+      <p *ngFor="let i of array">
+        {{ i }}
+      </p>
+    </div>
+  </div>
+</ng-template>
